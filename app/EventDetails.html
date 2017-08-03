@@ -26,6 +26,7 @@
         </div>
       </div>
 
+      <button class="btn" ng-disabled="buttonDisabled" >Disabled</button>
       <div ng-bind-html-unsafe="snippet">some title</div>
       <div ng-bind-html="snippet">some title</div>
 
@@ -45,6 +46,8 @@
           </address>
         </div>
       </div>
+
+      {{ [3,5,2][1] }}
 
       <hr>
 
