@@ -22,7 +22,7 @@
       <img ng-src="{{event.imageUrl}}" alt="{{event.name}}" />
       <div class="row">
         <div class="span11">
-          <h2 ng-class="myclass" ng-bind-template="{{event.name}} {{event.date}}"></h2>
+          <h2 ng-class="myclass" ng-bind-template="{{event.name | uppercase}} {{event.date | date:'mediumDate'}}"></h2>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
       <h2 ng-hide="boolValue">Hide This</h2>
       <div class="row">
         <div class="span3">
-          <div><strong>Date:</strong>{{event.date}} </div>
+          <div><strong>Date:</strong>{{event.date | date:'medium'}} </div>
           <div> <strong>Time:</strong>{{event.time}}  </div>
         </div>
 
@@ -52,9 +52,20 @@
       <hr>
 
       <h3>Sessions</h3>
-
+      Order by:
+      <select class="input-small" ng-model="sortorder">
+        <option selected value="name">Name</option>
+        <option value="-upVoteCount">Votes</option>
+      </select>
+      Show:
+      <select class="input-medium" ng-model="query.level">
+        <option selected value="">All</option>
+        <option selected value="Introductory">Introductory</option>
+        <option selected value="Intermediate">Intermediate</option>
+      </select>
+        <option selected value="Advanced">Advanced</option>
       <ul  class="thumbnails">
-        <li ng-repeat="session in event.sessions">
+        <li ng-repeat="session in event.sessions | orderBy:sortorder | limitTo:2 | filter:query">
           <div class="row session">
             <div class="span0 well votingWidget">
               <div class="votingButton" ng-click="upVoteSession(session)">
